@@ -7,10 +7,13 @@ public class Pieces {
 	private static int randNb=0;
 	private static Random random;
 	public static int[] currentPiecePos= {0,3};
-	public static int currentPieceRot =0;
+	private static int currentPieceRot =0;
+	public int[][] pieceChoice;
+	public int[] pieceShape;
 
 	
 	// Definition des pieces. Chaque chiffre correspond à une couleur
+	// Chaque piece, de taille 4*4  est définie par 16 valeurs par rotation
 	static int[][] T = { {0,1,0,0,0,1,1,0,0,1,0,0,0,0,0,0},{0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0},{0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,0},{0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0} };
 	static int[][] I = { {0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0},{2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},{0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0},{2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0} };
 	static int[][] Z = { {0,0,3,0,0,3,3,0,0,3,0,0,0,0,0,0},{0,0,0,0,0,3,3,0,0,0,3,3,0,0,0,0},{0,0,3,0,0,3,3,0,0,3,0,0,0,0,0,0},{0,0,0,0,0,3,3,0,0,0,3,3,0,0,0,0} };
@@ -36,49 +39,66 @@ public class Pieces {
 		random = new Random();
 	}
 	
-	public static int[][] create_piece() {
+	public void create_piece() {
 
 		randNb = random.nextInt(7);
 		
 		
        switch (randNb) {
 		case 1:
-			return T;		
+			this.pieceChoice= T;
+			break;
 		case 2:
-			return I;
+			this.pieceChoice= I;
+			break;
 		case 3:
-			return Z;
+			this.pieceChoice= Z;
+			break;
 		case 4:
-			return O;
+			this.pieceChoice= O;
+			break;
 		case 5:
-			return S;
+			this.pieceChoice= S;
+			break;
 		case 6:
-			return J;
+			this.pieceChoice= J;
+			break;
 		case 7:
-			return L;
+			this.pieceChoice= L;
+			break;
 			
-		default: return null;
-		}
+				}
+      pieceShape= pieceChoice[0];
 	}
 	
 	public void rotate() {
 		
 	
-		Pieces.currentPieceRot  = (currentPieceRot+1)%4;
+		Pieces.setCurrentPieceRot((getCurrentPieceRot()+1)%4);
 		
-		Pieces.currentPiecePos = create_piece()[currentPieceRot];
+	     pieceShape= pieceChoice[getCurrentPieceRot()];
 	}
 	
 	public void left() {
-		Pieces.currentPiecePos[1]--;
+		currentPiecePos[1]--;
 	}
 	
 	public void right() {
-		Pieces.currentPiecePos[1]++;
+		currentPiecePos[1]++;
 	}
 	
 	public void down() {
-		Pieces.currentPiecePos[0]++;
+		currentPiecePos[0]++;
+	}
+
+
+	public int getCurrentPieceRot() {
+		return currentPieceRot;
+	}
+
+
+	public static void setCurrentPieceRot(int currentPieceRot) {
+		Pieces.currentPieceRot = currentPieceRot;
 	}
 
 }
