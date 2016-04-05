@@ -4,6 +4,7 @@ package fr.esiea.tetris2016.model;
 
 
 
+
 public class Model {
 
 	private Pieces currentPiece;	
@@ -46,7 +47,7 @@ public class Model {
 
 
 
-
+ // Verifie si la piece créé entre déjà en collision = defaite
 	public boolean isGameEnded() {
 
 
@@ -88,5 +89,9 @@ public class Model {
 
 	}
 
+		
+		
+	
+	
 
 }
