@@ -48,7 +48,7 @@ public class GameShow extends JPanel {
 	
 	public void assignColor(){
 		// Couleurs inspirés de "Tetris Friend"
-		color[0] = Color.white; // background
+		color[0] = Color.black; // background
 		color[1] = Color.magenta; //T
 		color[2] = Color.cyan; // I
 		color[3] = Color.red; //Z
@@ -90,7 +90,6 @@ public class GameShow extends JPanel {
 			for (int j = 0; j<10; j++) {
 				nbCell = grid[i][j];
 				this.grid[i][j].setBackground(color[nbCell]);
-				System.out.println("printGRID= "+ nbCell+"en"+(i) +" et"+ (j));	
 			}
 		}
 	
@@ -105,8 +104,7 @@ public class GameShow extends JPanel {
 		for (int i=0; i < 4; i++) {
 			for (int j=0; j < 4; j++) {
 					nbCell= instancedPiece[currentPieceRot][count];
-					if (nbCell!=0  ) {
-						System.out.println("print= "+ nbCell+"en"+(currentPiecePos[0]+i) +" et"+ (currentPiecePos[1]+j));	
+					if (nbCell!=0  && currentPiecePos[0]+i<=15) {
 						this.grid[currentPiecePos[0]+i][currentPiecePos[1]+j].setBackground(color[nbCell]);
 					}
 					

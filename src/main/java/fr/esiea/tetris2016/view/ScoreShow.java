@@ -34,7 +34,7 @@ public class ScoreShow extends JLabel{
 
 
 	public void actualScore(int score){
-System.out.println("test KZO");
+
 		
 		currentScore.setText(Integer.toString(score));
 		

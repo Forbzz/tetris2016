@@ -4,13 +4,12 @@ public class Gameboard {
 
 	
 	
-	
 	public final static  int SIZEX=10;
 	public final static int SIZEY=16;
-	public int[][] grid;
+	public static int[][] grid;
+	public int fullLines;
 	
 	public Gameboard(){
-		
 		grid = new int[16][10];
 	}
 	
@@ -21,6 +20,7 @@ public class Gameboard {
 			for (int x = 0; x < SIZEX; x++) {
 				
 				grid[y][x] = 0;
+			
 			}
 		}
 		

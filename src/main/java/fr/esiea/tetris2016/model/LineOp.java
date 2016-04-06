@@ -8,7 +8,7 @@ public class LineOp extends Gameboard{
 
 	int sizeX= Gameboard.SIZEX;
 	int sizeY= Gameboard.SIZEY;
-	private int fullLines;
+	private static int fullLines;
 
 
 
@@ -27,7 +27,7 @@ public class LineOp extends Gameboard{
 		
 		for(int line=firstLineToClean; line >= endLineToClean; line--){
 
-			for(int column=10; column >=0; column--){
+			for(int column=9; column >=0; column--){
 
 				grid[line][column]= 0;
 
@@ -57,7 +57,7 @@ public class LineOp extends Gameboard{
 
 			for(int line=firstLine; line >= 0; line--){
 
-				for(int column=10; column >=0; column--){
+				for(int column=9; column >=0; column--){
 
 					grid[line+heightFall][column]= grid[line][column];
 
@@ -66,7 +66,7 @@ public class LineOp extends Gameboard{
 			}
 		}
 
-		for(int column=10; column >= 0; column--){
+		for(int column=9; column >= 0; column--){
 
 			grid[0][column]=0;
 
@@ -81,18 +81,18 @@ public class LineOp extends Gameboard{
 	}
 
 
-	public int checkFullLines() {
+	public static  int checkFullLines() {
 
 		int firstLineToClean=15;             	// Enregistre la premiere ligne a supprimer, a reutiliser dans la fonction de suppression
    			   		// Compte le nombre de lignes pleines à partir de la premiere ligne pleine
 		boolean isFirstLineToClean=true;        // Verifie que c'est bien la premiere ligne a supprimer
-
+		boolean isLineComplete= true;
 		for(int line=15; line >= 0; line--){
 
-			for(int column=10; column >=0; column--){
+			for(int column=9; column >=0; column--){
 
 				if(grid[line][column]==0){
-
+					isLineComplete=false;
 					break;
 				}
 
@@ -105,7 +105,12 @@ public class LineOp extends Gameboard{
 				isFirstLineToClean=false;
 
 			}
-			fullLines++;			
+			
+			System.out.println("fullLines LineOp=" + fullLines);
+			if(isLineComplete){
+				fullLines++;	
+			
+			}
 
 
 

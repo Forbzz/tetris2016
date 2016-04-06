@@ -8,8 +8,8 @@ public class Pieces {
 	private static Random random;
 	public  int[] currentPiecePos= {0,3};
 	public  int currentPieceRot =0;
-	public int[][] pieceChoice;
-	public int[] pieceShape;
+	public int[][][] pieceChoice;
+	public int[][]pieceShape;
 
 	
 	// Definition des pieces. Chaque chiffre correspond à une couleur
@@ -17,7 +17,7 @@ public class Pieces {
 	static int[][] T = { {0,1,0,0,0,1,1,0,0,1,0,0,0,0,0,0},{0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0},{0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,0},{0,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0} };
 	static int[][] I = { {0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0},{2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0},{0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0},{2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0} };
 	static int[][] Z = { {0,0,3,0,0,3,3,0,0,3,0,0,0,0,0,0},{0,0,0,0,0,3,3,0,0,0,3,3,0,0,0,0},{0,0,3,0,0,3,3,0,0,3,0,0,0,0,0,0},{0,0,0,0,0,3,3,0,0,0,3,3,0,0,0,0} };
-	static int[][] O = { {0,4,4,0,0,4,4,0,0,0,0,0,0,0,0,0},{0,4,4,0,0,4,4,0,0,0,0,0,0,0,0,0},{0,4,4,0,0,4,4,0,0,0,0,0,0,0,0,0},{0,4,4,0,0,4,4,0,0,0,0,0,0,0,0,0} };
+	static int[][] O = { {0,0,0,0,4,4,0,0,4,4,0,0,0,0,0,0},{0,0,0,0,4,4,0,0,4,4,0,0,0,0,0,0},{0,0,0,0,4,4,0,0,4,4,0,0,0,0,0,0}, {0,0,0,0,4,4,0,0,4,4,0,0,0,0,0,0}};
 	static int[][] S = { {0,5,0,0,0,5,5,0,0,0,5,0,0,0,0,0},{0,0,0,0,0,0,5,5,0,5,5,0,0,0,0,0},{0,5,0,0,0,5,5,0,0,0,5,0,0,0,0,0},{0,0,0,0,0,0,5,5,0,5,5,0,0,0,0,0} };
 	static int[][] J = { {0,0,6,0,0,0,6,0,0,6,6,0,0,0,0,0},{0,0,0,0,0,6,6,6,0,0,0,6,0,0,0,0},{0,6,6,0,0,6,0,0,0,6,0,0,0,0,0,0},{0,0,0,0,0,6,0,0,0,6,6,6,0,0,0,0} };
 	static int[][] L = { {0,7,0,0,0,7,0,0,0,7,7,0,0,0,0,0},{0,0,0,0,0,0,0,7,0,7,7,7,0,0,0,0},{0,7,7,0,0,0,7,0,0,0,7,0,0,0,0,0},{0,0,0,0,0,7,7,7,0,7,0,0,0,0,0,0} };
@@ -39,39 +39,41 @@ public class Pieces {
 		random = new Random();
 	}
 	
-	public void create_piece() {
+	public int[][] create_piece() {
 
-		randNb = random.nextInt(7);
+		randNb = random.nextInt(7) +1 ;
+		//System.out.println("randNB=" + randNb);
 
 		
-       switch (1) {
+       switch (randNb) {
 		case 1:
-			this.pieceChoice= T;
-			break;
+			return T;
+			
 		case 2:
-			this.pieceChoice= I;
-			break;
+			return I;
+			
 		case 3:
-			this.pieceChoice= Z;
-			break;
+			return Z;
+			
 		case 4:
-			this.pieceChoice= O;
-			break;
+			return O;
+			
 		case 5:
-			this.pieceChoice= S;
-			break;
+			return S;
+			
 		case 6:
-			this.pieceChoice= J;
-			break;
+			return J;
+			
 		case 7:
-			this.pieceChoice= L;
-			break;
+			return L;
+		
 			
 				}
-
+   /*	System.out.println("test2:" +  randNb+ "____"+ J);
      this.pieceShape= pieceChoice[0];
 		
-		System.out.println("test3:" +  randNb+ "____"+ this.pieceShape + pieceChoice[0]);
+		System.out.println("test3:" +  randNb+ "____"+ this.pieceShape + pieceChoice);*/
+		return null;
 	}
 	
 	public void rotate() {
@@ -79,7 +81,7 @@ public class Pieces {
 	
 	this.currentPieceRot = (currentPieceRot+1)%4;
 
-	   this.pieceShape= pieceChoice[currentPieceRot];
+	   //this.pieceShape= pieceChoice[currentPieceRot];
 
 	}
 	
@@ -92,7 +94,9 @@ public class Pieces {
 	}
 	
 	public void down() {
+		System.out.println("passe de " + getCurrentPiecePos()[0]);
 		getCurrentPiecePos()[0]++;
+		System.out.println("à " + getCurrentPiecePos()[0]);
 	}
 
 

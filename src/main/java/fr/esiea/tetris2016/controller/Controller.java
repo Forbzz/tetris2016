@@ -42,7 +42,7 @@ public class Controller{
 
 						view.showGrid(model.getGrid().grid, model.instancedPiece, 
 								model.getPiece().currentPiecePos, model.getPiece().getCurrentPieceRot());
-						System.out.println("at least you tried up");
+
 
 					}
 				}
@@ -143,9 +143,9 @@ public class Controller{
 						model.instancedPiece,
 						model.getPiece().currentPiecePos,
 						model.getPiece().currentPieceRot);
-model.goDown();
+
 			}else{
-				
+				if(isGameEnded){ this.endScreen(); break; }
 			this.step();	
 			}
 			
@@ -160,22 +160,21 @@ model.goDown();
 		
 	
 				model.gridUpdate();
-	
+	System.out.println("Il y a en lignes pleines:" + model.getFullLines());
 				model.getScore().increaseScore(model.getFullLines());
 
-				System.out.println("testGrid:" + model.getScore().getScore() );
-				view.refreshScore(model.getScore().getScore());
+				view.refreshScore(model.getScore().getScore());				
 				
-				model.newPiece();
-		
-		view.showGrid(model.getGrid().grid, model.instancedPiece, 
+				model.newPiece();	
+				System.out.println("On relance dans le step =" + model.instancedPiece);
+				view.showGrid(model.getGrid().grid, model.instancedPiece, 
 				model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
 
 		
 	}
 
 	public void endScreen(){
-		
+		System.out.println("c'est la fin");
 		view.showScore(model.getScore().getScore(),Scores.getLadder());
 		
 	}
