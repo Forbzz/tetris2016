@@ -23,6 +23,7 @@ public class Model {
 	private boolean leftIsBlocked;
 	
 	
+	
 
 
 	public Model() {
@@ -48,7 +49,8 @@ public class Model {
 		pieceIsBlocked = restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
 		rotationIsBlocked = restricted.Rotation(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
 		leftIsBlocked = restricted.Left(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
-
+		rightIsBlocked = restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
+		
 	}
 
 	public Pieces getPiece(){
@@ -100,6 +102,21 @@ public class Model {
 	public void gridUpdate(){
 
 		int count=0;		
+		for (int i=0; i < 4; i++) {
+			for (int j=0; j < 4; j++) {
+				if (count < 16) {
+					if (instancedPiece[currentPiece.getCurrentPieceRot()][count]>0) {
+						System.out.println("L'ancienne valeur de la grille de coordonnée" + (currentPiecePos[0]+i) + (currentPiecePos[1]+j)+ "est :"+ gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]);
+						gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
+						System.out.println("La nouvell valeur de la grille de coordonnée" + (currentPiecePos[0]+i) + (currentPiecePos[1]+j)+ "est :"+ gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]);
+					}
+				}
+				count++;
+			}
+		}
+		
+
+	/*	int count=0;		
 		for (int i=currentPiecePos[0]; i < currentPiecePos[0]+4; i++) {
 			for (int j=currentPiecePos[1]; j < currentPiecePos[1]+4; j++) {
 				if (count < 16) {
@@ -109,7 +126,8 @@ public class Model {
 				}
 				count++;
 			}
-		}
+		}*/
+
 
 	}
 
@@ -163,11 +181,13 @@ public class Model {
 	}
 	
 	public boolean goDown(){
-		
-		if(pieceIsBlocked==true){
+		System.out.println("Test du movedown");
+		if(restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece)==true){
+			System.out.println("la piece est bloquée en bas");
 			return false;
 		}
-
+		System.out.println("la piece n'est pas bloquée en bas");
+		System.out.println("La descente est safe, et sa position est :" +currentPiecePos[0] + currentPiecePos[1]  );
 		currentPiece.down();
 		return true;
 	}

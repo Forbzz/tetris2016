@@ -135,15 +135,15 @@ public class Controller{
 			
 			
 			
-			if(model.goRight()){
+			if(model.goDown()){
 				
-				System.out.println("descend");
+				System.out.println("descend avec la piece " +model.instancedPiece + " de coordonné " + model.getPiece().currentPiecePos[0] + model.getPiece().currentPiecePos[1]);
 				view.showGrid(
 						model.getGrid().grid,
 						model.instancedPiece,
 						model.getPiece().currentPiecePos,
 						model.getPiece().currentPieceRot);
-
+model.goDown();
 			}else{
 				
 			this.step();	

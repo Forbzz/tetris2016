@@ -104,11 +104,12 @@ public class GameShow extends JPanel {
 		for (int i=0; i < 4; i++) {
 			for (int j=0; j < 4; j++) {
 					nbCell= instancedPiece[currentPieceRot][count];
-					if (nbCell>0 ) {
-		
+					if (nbCell!=0  ) {
+						
 						this.grid[currentPiecePos[0]+i][currentPiecePos[1]+j].setBackground(color[nbCell]);
 					}
-					System.out.println("count=  " + i + j + count);
+					
+			
 					count++;
 				}
 			
