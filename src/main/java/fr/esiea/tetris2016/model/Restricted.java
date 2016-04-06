@@ -96,29 +96,23 @@ public class Restricted {
 
 	// Verifie que la piece peut descendre
 	public boolean Down(int [] currentPiecePos, int currentPieceRot, int[][] grid,int[][]currentPiece) {
-		
-		System.out.println("test une fois si on peut descendre" + currentPiecePos[0] + currentPiecePos[1]  );
+		int nextPos= currentPiecePos[0]; // permet prédire a l'avance s'il y aura heurtage 
 		int count=0;
 		
-		// test que la ligne du bas est rempli ou pas
+
 		for (int i= 0; i <4; i++) {
 			for (int j=0; j < 4; j++) {	
+			
 				
-				if( currentPiecePos[0]+1>=15){
-					System.out.println("On atteint le bas");
+				if( nextPos+1>=15){
 					return true;
 				}
-				if((currentPiecePos[0]+i)<16){
-				System.out.println("La prochaine valeur de la piece est " + currentPiece[currentPieceRot][count]  
-						+ " et la grille :"+ (grid[currentPiecePos[0]+i][currentPiecePos[1]+j]) + " en position=" + currentPiecePos[0]+ currentPiecePos[1]+ "avec i=" +(currentPiecePos[0]+i )+"et j="+(currentPiecePos[1]+j));
+				if((nextPos+i)<16){
 				}
-				if (currentPiece[currentPieceRot][count]!=0 && (grid[currentPiecePos[0]+i][currentPiecePos[1]+j] != 0 ) ) {
-					System.out.println("on rencontre une piece en dessous" + currentPiece[currentPieceRot][count]  
-							+ " de valeur :"+ (grid[currentPiecePos[0]+i][currentPiecePos[1]+j]) + " en position=" + (currentPiecePos[0]+i)+ (currentPiecePos[1]+j)+ "avec i=" +(currentPiecePos[0]+i )+"et j="+(currentPiecePos[1]+j));
+				if (currentPiece[currentPieceRot][count]!=0 && (grid[nextPos+i][currentPiecePos[1]+j] != 0 ) ) {
 					return true; 
 				}
 			
-			System.out.println("verifie:" +currentPiecePos[0] + (currentPiecePos[1]));
 				count++;
 			}
 

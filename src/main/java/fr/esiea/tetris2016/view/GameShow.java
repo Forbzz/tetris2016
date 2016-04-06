@@ -90,6 +90,7 @@ public class GameShow extends JPanel {
 			for (int j = 0; j<10; j++) {
 				nbCell = grid[i][j];
 				this.grid[i][j].setBackground(color[nbCell]);
+				System.out.println("printGRID= "+ nbCell+"en"+(i) +" et"+ (j));	
 			}
 		}
 	
@@ -105,7 +106,7 @@ public class GameShow extends JPanel {
 			for (int j=0; j < 4; j++) {
 					nbCell= instancedPiece[currentPieceRot][count];
 					if (nbCell!=0  ) {
-						
+						System.out.println("print= "+ nbCell+"en"+(currentPiecePos[0]+i) +" et"+ (currentPiecePos[1]+j));	
 						this.grid[currentPiecePos[0]+i][currentPiecePos[1]+j].setBackground(color[nbCell]);
 					}
 					

@@ -39,7 +39,7 @@ public class Model {
 		currentPiece = Pieces.getClone();	
 		
 		currentPiecePos= currentPiece.getCurrentPiecePos();
-		System.out.println("test2:" +  currentPiecePos[1]);
+
 		this.newPiece();
 
 
@@ -64,7 +64,7 @@ public class Model {
 
 
 	public void newPiece() {
-		System.out.println("test:" +  currentPiece.getCurrentPieceRot());
+
 		this.currentPiece.create_piece();
 		this.currentPiecePos[0]=0; // Position verticale
 		this.currentPiecePos[1]=3; // Position horizontale 
@@ -106,9 +106,7 @@ public class Model {
 			for (int j=0; j < 4; j++) {
 				if (count < 16) {
 					if (instancedPiece[currentPiece.getCurrentPieceRot()][count]>0) {
-						System.out.println("L'ancienne valeur de la grille de coordonnée" + (currentPiecePos[0]+i) + (currentPiecePos[1]+j)+ "est :"+ gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]);
 						gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
-						System.out.println("La nouvell valeur de la grille de coordonnée" + (currentPiecePos[0]+i) + (currentPiecePos[1]+j)+ "est :"+ gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]);
 					}
 				}
 				count++;
@@ -181,13 +179,10 @@ public class Model {
 	}
 	
 	public boolean goDown(){
-		System.out.println("Test du movedown");
+
 		if(restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece)==true){
-			System.out.println("la piece est bloquée en bas");
 			return false;
 		}
-		System.out.println("la piece n'est pas bloquée en bas");
-		System.out.println("La descente est safe, et sa position est :" +currentPiecePos[0] + currentPiecePos[1]  );
 		currentPiece.down();
 		return true;
 	}
