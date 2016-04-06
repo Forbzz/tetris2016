@@ -21,13 +21,13 @@ public class Scores {
 		this.score = 0;
 	}
 
-	public void increaseScore(int lineCleared, int combo)
+	public void increaseScore(int lineCleared/*, int combo*/)
 	{
 
 		this.score += (10 * lineCleared);
-		if(combo==2){ this.score *= 2; }
+		/* if(combo==2){ this.score *= 2; }
 		if(combo==3){ this.score *=3;}
-		if(combo==4){ this.score *=4;}
+		if(combo<=4){ this.score *=4;} */
 	}
 
 
@@ -104,10 +104,19 @@ public class Scores {
 				}
 				
 				
+			for (i=0; i<5 ; i ++){
 				
-				writeScore(ladder,newScoreArray);
+				scoreArray[i]= newScoreArray[i];
+			}
+			
+				writeScore(ladder,scoreArray);
 			}
 		}
+	
+	public static int[] getLadder() {
+		return scoreArray;
+	}
+	
 	}
 
 

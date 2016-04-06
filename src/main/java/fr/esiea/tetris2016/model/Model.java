@@ -6,23 +6,49 @@ package fr.esiea.tetris2016.model;
 
 
 public class Model {
+	
 
 	private Pieces currentPiece;	
-	private Gameboard grid;
-	private int[] instancedPiece;
+	private Scores score;
+	private LineOp fullLineGet;
+	private int fullLines;
+	private Gameboard gridGame;
+	public int[][] instancedPiece;
+	private int[] currentPiecePos;
+	private Restricted restricted;
 
-
-
-
+	private boolean rightIsBlocked;
+	private boolean pieceIsBlocked;
+	private boolean rotationIsBlocked;
+	private boolean leftIsBlocked;
+	
+	
 
 
 	public Model() {
+		
+		restricted = new Restricted();
 
-		grid = new Gameboard();
+
+		
+//		fullLines = fullLineGet.checkFullLines();
+		gridGame = new Gameboard();
+		score = new Scores();
+		fullLineGet = new LineOp();
+		currentPiece = Pieces.getClone();	
+		
+		currentPiecePos= currentPiece.getCurrentPiecePos();
+		System.out.println("test2:" +  currentPiecePos[1]);
 		this.newPiece();
-		currentPiece = Pieces.getClone();
-		grid.initArray();
-		instancedPiece= currentPiece.pieceShape;
+
+
+		gridGame.initArray();
+		instancedPiece= currentPiece.pieceChoice;
+	
+		pieceIsBlocked = restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
+		rotationIsBlocked = restricted.Rotation(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
+		leftIsBlocked = restricted.Left(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
+
 	}
 
 	public Pieces getPiece(){
@@ -31,34 +57,32 @@ public class Model {
 	}
 
 	public Gameboard getGrid(){
-
-
-		return this.grid;
+		return this.gridGame;
 	}
 
 
-	private void newPiece() {
-
-		currentPiece.create_piece();
-		instancedPiece[0]=0; // Position verticale
-		instancedPiece[1]=3; // Position horizontale 
+	public void newPiece() {
+		System.out.println("test:" +  currentPiece.getCurrentPieceRot());
+		this.currentPiece.create_piece();
+		this.currentPiecePos[0]=0; // Position verticale
+		this.currentPiecePos[1]=3; // Position horizontale 
 	}
 
 
 
 
- // Verifie si la piece créé entre déjà en collision = defaite
+	// Verifie si la piece créé entre déjà en collision = defaite
 	public boolean isGameEnded() {
 
 
 		int count=0;		
-		for (int i=instancedPiece[0]; i < instancedPiece[0]+4; i++) {
+		for (int i=currentPiecePos[0]; i < currentPiecePos[0]+4; i++) {
 
-			for (int j=instancedPiece[1]; j <instancedPiece[1]+4; j++) {
+			for (int j=currentPiecePos[1]; j <currentPiecePos[1]+4; j++) {
 
-				if (count < 16) {
+				if (count < 16 ) {
 
-					if (currentPiece.pieceChoice[currentPiece.getCurrentPieceRot()][count]>0 && Gameboard.grid[i][j] > 0) {
+					if ((instancedPiece[currentPiece.getCurrentPieceRot()][count]>0) && (gridGame.grid[i][j] > 0)) {
 
 						return true;
 					}
@@ -76,11 +100,11 @@ public class Model {
 	public void gridUpdate(){
 
 		int count=0;		
-		for (int i=instancedPiece[0]; i < instancedPiece[0]+4; i++) {
-			for (int j=instancedPiece[1]; j < instancedPiece[1]+4; j++) {
+		for (int i=currentPiecePos[0]; i < currentPiecePos[0]+4; i++) {
+			for (int j=currentPiecePos[1]; j < currentPiecePos[1]+4; j++) {
 				if (count < 16) {
-					if (currentPiece.pieceChoice[currentPiece.getCurrentPieceRot()][count]>0) {
-						Gameboard.grid[i][j]=currentPiece.pieceChoice[currentPiece.getCurrentPieceRot()][count];
+					if (instancedPiece[currentPiece.getCurrentPieceRot()][count]>0) {
+						gridGame.grid[i][j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
 					}
 				}
 				count++;
@@ -89,9 +113,81 @@ public class Model {
 
 	}
 
-		
-		
+
+	// Ici on met les actions de deplacements en fonction des restrictions
+
+
 	
 	
+	public boolean goLeft(){
+
+		if(leftIsBlocked==true){		
+			return false;
+		}
+
+		if(pieceIsBlocked==true){
+			return false;
+		}
+
+		currentPiece.left();
+		return true;
+
+	}
+	
+	
+	public boolean goRight(){
+
+		if(rightIsBlocked==true){		
+			return false;
+		}
+
+		if(pieceIsBlocked==true){
+			return false;
+		}
+
+		currentPiece.right();
+		return true;
+
+	}
+	
+	public boolean goTurn(){
+		
+		if(rotationIsBlocked==true){
+			
+			return false;
+		}
+		
+		currentPiece.rotate();
+		return true;
+		
+	}
+	
+	public boolean goDown(){
+		
+		if(pieceIsBlocked==true){
+			return false;
+		}
+
+		currentPiece.down();
+		return true;
+	}
+
+	public Scores getScore() {
+		return score;
+	}
+
+	public void setScore(Scores score) {
+		this.score = score;
+	}
+
+	public int getFullLines() {
+		return fullLines;
+	}
+
 
 }
+
+
+
+
+

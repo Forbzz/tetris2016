@@ -5,12 +5,13 @@ public class Gameboard {
 	
 	
 	
-	public final static int SIZEX=10,SIZEY=16;
-	public static int[][] grid;
+	public final static  int SIZEX=10;
+	public final static int SIZEY=16;
+	public int[][] grid;
 	
 	public Gameboard(){
 		
-		grid = new int[SIZEY][SIZEX];
+		grid = new int[16][10];
 	}
 	
 	public void initArray(){

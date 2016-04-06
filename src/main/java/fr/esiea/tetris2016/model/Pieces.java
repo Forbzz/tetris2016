@@ -6,8 +6,8 @@ import java.util.Random;
 public class Pieces {
 	private static int randNb=0;
 	private static Random random;
-	public static int[] currentPiecePos= {0,3};
-	private static int currentPieceRot =0;
+	public  int[] currentPiecePos= {0,3};
+	public  int currentPieceRot =0;
 	public int[][] pieceChoice;
 	public int[] pieceShape;
 
@@ -42,9 +42,9 @@ public class Pieces {
 	public void create_piece() {
 
 		randNb = random.nextInt(7);
+
 		
-		
-       switch (randNb) {
+       switch (1) {
 		case 1:
 			this.pieceChoice= T;
 			break;
@@ -68,27 +68,31 @@ public class Pieces {
 			break;
 			
 				}
-      pieceShape= pieceChoice[0];
+
+     this.pieceShape= pieceChoice[0];
+		
+		System.out.println("test3:" +  randNb+ "____"+ this.pieceShape + pieceChoice[0]);
 	}
 	
 	public void rotate() {
-		
+
 	
-		Pieces.setCurrentPieceRot((getCurrentPieceRot()+1)%4);
-		
-	     pieceShape= pieceChoice[getCurrentPieceRot()];
+	this.currentPieceRot = (currentPieceRot+1)%4;
+
+	   this.pieceShape= pieceChoice[currentPieceRot];
+
 	}
 	
 	public void left() {
-		currentPiecePos[1]--;
+		getCurrentPiecePos()[1]--;
 	}
 	
 	public void right() {
-		currentPiecePos[1]++;
+		getCurrentPiecePos()[1]++;
 	}
 	
 	public void down() {
-		currentPiecePos[0]++;
+		getCurrentPiecePos()[0]++;
 	}
 
 
@@ -97,8 +101,14 @@ public class Pieces {
 	}
 
 
-	public static void setCurrentPieceRot(int currentPieceRot) {
-		Pieces.currentPieceRot = currentPieceRot;
+
+
+
+	public int[] getCurrentPiecePos() {
+		return currentPiecePos;
 	}
+
+
+
 
 }
