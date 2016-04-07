@@ -16,7 +16,7 @@ public class Controller{
 	private boolean isGameEnded;
 	private long time;
 	private long timeStep;
-
+	private int combo;
 
 
 	public Controller(){
@@ -28,7 +28,7 @@ public class Controller{
 		this.isGameEnded = false;
 		this.time= 0;
 		this.timeStep=0;
-
+		this.combo=1;
 
 
 
@@ -160,8 +160,8 @@ public class Controller{
 		
 	
 				model.gridUpdate();
-	System.out.println("Il y a en lignes pleines:" + model.getFullLines());
-				model.getScore().increaseScore(model.getFullLines());
+		combo=1;
+				model.getScore().increaseScore(model.getFullLines(),combo);
 
 				view.refreshScore(model.getScore().getScore());				
 				
