@@ -7,8 +7,6 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import fr.esiea.tetris2016.model.Model;
-
 public class GameShow extends JPanel {
 
 	/**

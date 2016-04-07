@@ -4,11 +4,9 @@ package fr.esiea.tetris2016.model;
 
 public class Restricted {
 
-	private boolean restricted;
-	
 	public Restricted(){
 		
-		this.setRestricted(true);
+
 		
 	}
 	
@@ -127,15 +125,7 @@ public class Restricted {
 	}
 
 
-	public boolean isRestricted() {
-		return restricted;
-	}
-
-
-	public void setRestricted(boolean restricted) {
-		this.restricted = restricted;
-	}
-
+	
 
 
 

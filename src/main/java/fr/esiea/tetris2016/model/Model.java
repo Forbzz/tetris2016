@@ -10,7 +10,6 @@ public class Model {
 
 	private Pieces currentPiece;	
 	private Scores score;
-	private LineOp fullLineGet;
 	public int fullLines;
 	private Gameboard gridGame;
 	public int[][] instancedPiece;
@@ -33,8 +32,6 @@ public class Model {
 		gridGame= new Gameboard();
 
 		score = new Scores();
-		fullLineGet = new LineOp();
-		fullLines = fullLineGet.checkFullLines();
 System.out.println("fullLinesmodel=" +fullLines);
 		currentPiece = Pieces.getClone();	
 		currentPiecePos= currentPiece.getCurrentPiecePos();
@@ -110,17 +107,19 @@ System.out.println("fullLinesmodel=" +fullLines);
 			for (int j=0; j < 4; j++) {
 				if (count < 16) {
 					if (instancedPiece[currentPiece.getCurrentPieceRot()][count]!=0) {
-						gridGame.grid[currentPiecePos[0]+i-1][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
-					}
+						gridGame.grid[currentPiecePos[0]-1+i][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
+					
+					
 				}
 				count++;
 			}
-		}
+		
 		
 
 
 	}
-
+		}
+	}
 
 	// Ici on met les actions de deplacements en fonction des restrictions
 

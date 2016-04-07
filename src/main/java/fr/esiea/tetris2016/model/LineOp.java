@@ -101,7 +101,7 @@ public class LineOp extends Gameboard{
 
 			if(isFirstLineToClean==true && isLineComplete==true){
 				
-				System.out.println("pourquoi Line ne bouge pas..!!" + line);
+	
 								firstLineToClean=line;
 			System.out.println("First Line to clean="+ firstLineToClean +" & Line ="+ line);
 								isFirstLineToClean=false;
