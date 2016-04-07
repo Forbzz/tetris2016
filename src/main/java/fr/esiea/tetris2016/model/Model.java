@@ -164,25 +164,31 @@ rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRo
 		
 	}
 	
-	public boolean goDown(){
+	public boolean isDownFree(){
 		pieceIsBlocked=restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 		if(pieceIsBlocked==true  ){
 
 				currentPiecePos[0]++;
 			return false;
 		}
-
-
 		
-		currentPiece.down();
+
 		return true;
 	}
 
 	public Scores getScore() {
 		return score;
 	}
-
 	
+	public void emergencyUp(){ // remonte la piece quand elle traverse une autre
+		
+	currentPiece.up();
+	}
+
+	public void goDown(){
+		
+		currentPiece.down();
+	}
 
 	public int getFullLines() {
 		fullLines= LineOp.checkFullLines();

@@ -76,14 +76,13 @@ System.out.println("test droite");
 				}
 
 				if(e.getKeyCode()== KeyEvent.VK_DOWN){
-					if(model.goDown()==true){
-
-						if(model.goDown() ==false){System.out.println("c'est faux pourqoui ça descend?");}
+					if(model.isDownFree()==true){
+				model.goDown();
 						model.getGrid();
 						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
 
-					}
+					}else{  model.emergencyUp();}
 				
 				}
 
@@ -140,8 +139,8 @@ System.out.println("test droite");
 			
 			
 			
-			if(model.goDown()){
-				
+			if(model.isDownFree()){
+				model.goDown();
 				model.getGrid();
 				view.showGrid(
 						Gameboard.grid,

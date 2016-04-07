@@ -91,7 +91,12 @@ public class Pieces {
 	public void down() {
 		getCurrentPiecePos()[0]++;
 	}
-
+	
+	public void up(){
+		
+		getCurrentPiecePos()[0]--;
+	}
+	
 
 	public int getCurrentPieceRot() {
 		return currentPieceRot;
