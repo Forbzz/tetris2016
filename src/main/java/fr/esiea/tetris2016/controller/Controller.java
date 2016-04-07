@@ -128,7 +128,7 @@ public class Controller{
 		while(!isGameEnded){
 			
 			time= System.currentTimeMillis();
-			timeStep = time + 500;
+			timeStep = time + 400;
 			
 			while(timeStep > time){
 				time = System.currentTimeMillis();}
@@ -137,7 +137,6 @@ public class Controller{
 			
 			if(model.goDown()){
 				
-				System.out.println("descend avec la piece " +model.instancedPiece + " de coordonné " + model.getPiece().currentPiecePos[0] + model.getPiece().currentPiecePos[1]);
 				view.showGrid(
 						model.getGrid().grid,
 						model.instancedPiece,
@@ -145,7 +144,8 @@ public class Controller{
 						model.getPiece().currentPieceRot);
 
 			}else{
-				if(isGameEnded){ this.endScreen(); break; }
+				if(isGameEnded){ 
+					this.endScreen(); break; }
 			this.step();	
 			}
 			
@@ -166,15 +166,16 @@ public class Controller{
 				view.refreshScore(model.getScore().getScore());				
 				
 				model.newPiece();	
-				System.out.println("On relance dans le step =" + model.instancedPiece);
 				view.showGrid(model.getGrid().grid, model.instancedPiece, 
 				model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
+				isGameEnded = model.isGameEnded();
 
 		
 	}
 
 	public void endScreen(){
-		System.out.println("c'est la fin");
+		System.out.println("c'est la fin avec le score de " + model.getScore().getScore());
+		
 		view.showScore(model.getScore().getScore(),Scores.getLadder());
 		
 	}

@@ -32,15 +32,13 @@ public class Model {
 		gridGame= new Gameboard();
 
 		score = new Scores();
-System.out.println("fullLinesmodel=" +fullLines);
+
 		currentPiece = Pieces.getClone();	
 		currentPiecePos= currentPiece.getCurrentPiecePos();
 
 		this.newPiece();
 	
 		gridGame.initArray();
-		instancedPiece= currentPiece.create_piece();
-		System.out.println(" on refait le new piece =" + instancedPiece);
 		
 		pieceIsBlocked = restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
 		rotationIsBlocked = restricted.Rotation(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
@@ -57,7 +55,6 @@ System.out.println("fullLinesmodel=" +fullLines);
 		currentPiecePos[1]=3; // Position horizontale 	
 		currentPiece.currentPieceRot=0;
 		instancedPiece=currentPiece.create_piece();
-		System.out.println("new piece =" + currentPiece.create_piece());
 	}
 
 	public Pieces getPiece(){
@@ -170,11 +167,16 @@ System.out.println("fullLinesmodel=" +fullLines);
 	}
 	
 	public boolean goDown(){
+		int nextPos= currentPiecePos[0]+1; // Pour prevenir les debordements
+		
+		pieceIsBlocked=restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
+		if(pieceIsBlocked==true  ){
 
-		if(restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece)==true){
-			currentPiecePos[0]++;
+				currentPiecePos[0]++;
 			return false;
 		}
+
+
 		
 		currentPiece.down();
 		return true;

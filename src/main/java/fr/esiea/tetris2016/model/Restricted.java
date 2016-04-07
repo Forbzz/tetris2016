@@ -101,18 +101,17 @@ public class Restricted {
 
 		for (int i= 0; i <4; i++) {
 			for (int j=0; j < 4; j++) {	
-			
-				if( (nextPos+i)>=16 && instancedPiece[currentPieceRot][count]!=0){
 				
+				if( ((nextPos+i)>=16 && instancedPiece[currentPieceRot][count]!=0 ) ){
+					if((nextPos ==15)||( nextPos==14 && instancedPiece[currentPieceRot][13]==2)){ currentPiecePos[0]--;}
 					return true; 
 					
 				}
 				
 				if(instancedPiece[currentPieceRot][count]!=0){
 				if(  grid[nextPos+i][currentPiecePos[1]+j] != 0 ) {
-					
 			
-					return true; 
+				return true; 
 					}
 				}
 			
@@ -120,7 +119,6 @@ public class Restricted {
 			}
 
 		}
-	
 		return false;
 	}
 

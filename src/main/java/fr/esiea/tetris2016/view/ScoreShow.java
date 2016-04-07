@@ -58,6 +58,7 @@ public class ScoreShow extends JLabel{
 	
 	public void showEnd(int score, int [] scoreArray){
 	
+		System.out.println("Score dans showend= " + score);
 		title.setText("YOU LOST");
 		currentScore.setText("Your score is: "+Integer.toString(score));
 		

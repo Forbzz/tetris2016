@@ -88,7 +88,7 @@ public class LineOp extends Gameboard{
 		boolean isFirstLineToClean=true;        // Verifie que c'est bien la premiere ligne a supprimer
 		boolean isLineComplete= true;
 		for(int line=15; line >= 0; line--){
-			System.out.println("test: " +line);
+
 			 isLineComplete= true;
 			for(int column=9; column >=0; column--){
 
@@ -103,12 +103,10 @@ public class LineOp extends Gameboard{
 				
 	
 								firstLineToClean=line;
-			System.out.println("First Line to clean="+ firstLineToClean +" & Line ="+ line);
 								isFirstLineToClean=false;
 
 							}
 							
-							System.out.println("fullLines LineOp=" + fullLines);
 							if(isLineComplete){
 								fullLines++;	
 							
@@ -117,7 +115,6 @@ public class LineOp extends Gameboard{
 
 
 		}
-		System.out.println("Suppression de"+ firstLineToClean + "à" + (firstLineToClean - fullLines+1));
 		deleteFullLines(firstLineToClean,fullLines, grid);
 		return fullLines;  // Pour pouvoir faire des opérations avec le score
 

@@ -42,7 +42,6 @@ public class Pieces {
 	public int[][] create_piece() {
 
 		randNb = random.nextInt(7) +1 ;
-		//System.out.println("randNB=" + randNb);
 
 		
        switch (randNb) {
@@ -69,11 +68,7 @@ public class Pieces {
 		
 			
 				}
-   /*	System.out.println("test2:" +  randNb+ "____"+ J);
-     this.pieceShape= pieceChoice[0];
-		
-		System.out.println("test3:" +  randNb+ "____"+ this.pieceShape + pieceChoice);*/
-		return null;
+ 	return null;
 	}
 	
 	public void rotate() {
@@ -94,9 +89,7 @@ public class Pieces {
 	}
 	
 	public void down() {
-		System.out.println("passe de " + getCurrentPiecePos()[0]);
 		getCurrentPiecePos()[0]++;
-		System.out.println("à " + getCurrentPiecePos()[0]);
 	}
 
 
