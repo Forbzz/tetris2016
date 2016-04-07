@@ -40,7 +40,8 @@ public class Controller{
 				if(e.getKeyCode()== KeyEvent.VK_UP){
 					if(model.goTurn()){
 
-						view.showGrid(model.getGrid().grid, model.instancedPiece, 
+						model.getGrid();
+						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().currentPiecePos, model.getPiece().getCurrentPieceRot());
 
 
@@ -52,7 +53,8 @@ public class Controller{
 
 					if(model.goLeft()){
 
-						view.showGrid(model.getGrid().grid, model.instancedPiece, 
+						model.getGrid();
+						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().currentPiecePos, model.getPiece().getCurrentPieceRot());
 
 					}
@@ -63,19 +65,22 @@ public class Controller{
 				}
 
 				if(e.getKeyCode()== KeyEvent.VK_RIGHT){
-					
+			
 					if(model.goRight()){
-
-						view.showGrid(model.getGrid().grid, model.instancedPiece, 
+System.out.println("test droite");
+						model.getGrid();
+						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
 
 					}
 				}
 
 				if(e.getKeyCode()== KeyEvent.VK_DOWN){
-					if(model.goDown()){
+					if(model.goDown()==true){
 
-						view.showGrid(model.getGrid().grid, model.instancedPiece, 
+						if(model.goDown() ==false){System.out.println("c'est faux pourqoui ça descend?");}
+						model.getGrid();
+						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
 
 					}
@@ -137,8 +142,9 @@ public class Controller{
 			
 			if(model.goDown()){
 				
+				model.getGrid();
 				view.showGrid(
-						model.getGrid().grid,
+						Gameboard.grid,
 						model.instancedPiece,
 						model.getPiece().currentPiecePos,
 						model.getPiece().currentPieceRot);
@@ -166,7 +172,8 @@ public class Controller{
 				view.refreshScore(model.getScore().getScore());				
 				
 				model.newPiece();	
-				view.showGrid(model.getGrid().grid, model.instancedPiece, 
+				model.getGrid();
+				view.showGrid(Gameboard.grid, model.instancedPiece, 
 				model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
 				isGameEnded = model.isGameEnded();
 

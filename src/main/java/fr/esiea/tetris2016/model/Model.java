@@ -40,10 +40,6 @@ public class Model {
 	
 		gridGame.initArray();
 		
-		pieceIsBlocked = restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
-		rotationIsBlocked = restricted.Rotation(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
-		rightIsBlocked = restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
-		leftIsBlocked = restricted.Left(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
 
 		
 	}
@@ -82,7 +78,7 @@ public class Model {
 
 				if (count < 16 ) {
 
-					if ((instancedPiece[currentPiece.getCurrentPieceRot()][count]>0) && (gridGame.grid[i][j] > 0)) {
+					if ((instancedPiece[currentPiece.getCurrentPieceRot()][count]>0) && (Gameboard.grid[i][j] > 0)) {
 
 						return true;
 					}
@@ -104,7 +100,7 @@ public class Model {
 			for (int j=0; j < 4; j++) {
 				if (count < 16) {
 					if (instancedPiece[currentPiece.getCurrentPieceRot()][count]!=0) {
-						gridGame.grid[currentPiecePos[0]-1+i][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
+						Gameboard.grid[currentPiecePos[0]-1+i][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
 					
 					
 				}
@@ -124,6 +120,7 @@ public class Model {
 	
 	
 	public boolean goLeft(){
+		leftIsBlocked = restricted.Left(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 
 		if(leftIsBlocked==true){		
 			return false;
@@ -140,7 +137,7 @@ public class Model {
 	
 	
 	public boolean goRight(){
-
+rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 		if(rightIsBlocked==true){		
 			return false;
 		}
@@ -155,7 +152,8 @@ public class Model {
 	}
 	
 	public boolean goTurn(){
-		
+		rotationIsBlocked = restricted.Rotation(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
+
 		if(rotationIsBlocked==true){
 			
 			return false;
@@ -167,9 +165,7 @@ public class Model {
 	}
 	
 	public boolean goDown(){
-		int nextPos= currentPiecePos[0]+1; // Pour prevenir les debordements
-		
-		pieceIsBlocked=restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), gridGame.grid , instancedPiece);
+		pieceIsBlocked=restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 		if(pieceIsBlocked==true  ){
 
 				currentPiecePos[0]++;

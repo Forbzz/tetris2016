@@ -5,35 +5,44 @@ package fr.esiea.tetris2016.model;
 public class Restricted {
 
 	public Restricted(){
-		
 
-		
+
+
 	}
-	
-	
+
+
 	// vérifie si la position suivante de la rotation est possible ou pas
 	public boolean Rotation(int [] currentPiecePos,int currentPieceRot, int [][] grid,int[][]currentPiece) {
-		
-		
-	currentPieceRot++;
+		int nextRot = (currentPieceRot +1)%4;
+		boolean leftIsBlocked = Left(currentPiecePos, nextRot, Gameboard.grid , currentPiece);
+		boolean rightIsBlocked = Right(currentPiecePos, nextRot, Gameboard.grid , currentPiece);
+		boolean downIsBlocked = Down(currentPiecePos, nextRot, Gameboard.grid , currentPiece);
 
+		if(leftIsBlocked== true || rightIsBlocked == true || downIsBlocked == true){
+			return true;
+		}
+		return false;	
+
+		/*
 		int count=0; 
 
-		for (int i=currentPiecePos[0]; i < currentPiecePos[0]+4; i++) {
-			for (int j=currentPiecePos[1]; j < currentPiecePos[1]+4; j++) {
-	
+		for (int i=0; i < 4; i++) {
+			for (int j=0; j < 4; j++) {
 
-				if (currentPiece[currentPieceRot][count]!=0 
-						&& currentPiecePos[1]+count%4+1 > Gameboard.SIZEX) { // Test que la partie non-vide de la piece ne soit pas en dehors du grid droit
 
-					return true;
-				}
+				if (currentPiece[nextRot][count]!=0 ){
+					if((currentPiecePos[1]+i+1) >=15) { // Test que la partie non-vide de la piece ne soit pas en dehors du grid droit
 
-				if (currentPiece[currentPieceRot][count]!=0 
-						&& currentPiecePos[1]+count%4 < 0) {					// Test que la partie non-vide de la piece ne soit pas en dehors du grid gauche
+						return true;
+					}
+					if((currentPiecePos[1]+j-1)< 0){					// Test que la partie non-vide de la piece ne soit pas en dehors du grid gauche
 
 					return true;
 				}
+
+				}
+
+
 
 
 				// Test contact en les pieces du board et la piece courante
@@ -47,21 +56,31 @@ public class Restricted {
 
 		}
 
-		return false;
+		return false; */
 
 	}
 
 	// Verifie que l'on est bloqué à droite ou pas
 
 	public boolean  Right(int [] currentPiecePos, int currentPieceRot, int[][] grid, int[][]currentPiece) {
-		
+		int nextPos= currentPiecePos[1]+1;
 		int count=0;
-		
-		for (int i=currentPiecePos[0]; i < currentPiecePos[0]+4; i++) {
-			for (int j=currentPiecePos[1]+1; j < currentPiecePos[1]+5; j++) {
 
-				if (currentPiece[currentPieceRot][count]!=0 && grid[currentPiecePos[0]+(count/4)][currentPiecePos[1]+(count%4)+1]!=0) {
-					return true; 
+		for (int i=0; i < 4; i++) {
+			for (int j=0; j < 4; j++) {
+				if(currentPiece[currentPieceRot][count]!=0){			
+
+					if((nextPos+j) >=10){
+						System.out.println("t'es à droite");
+						return true;
+					}
+
+					if(grid[currentPiecePos[0]+i][nextPos+j]!=0){
+						System.out.println("t'es à gauche d'une piece");
+						return true; 
+					}
+
+
 				}
 				count++;
 			}
@@ -72,14 +91,22 @@ public class Restricted {
 
 	// Verifie que l'on est bloqué à gauche ou pas
 	public  boolean Left(int [] currentPiecePos, int currentPieceRot, int[][] grid,int[][]currentPiece) {
-		
-		int count=0;
-		
-		for (int i=currentPiecePos[0]; i < currentPiecePos[0]+4; i++) {
-			for (int j=currentPiecePos[1]-1; j < currentPiecePos[1]+3; j++) {
 
-				if (currentPiece[currentPieceRot][count]>0 && grid[currentPiecePos[0]+(count/4)][currentPiecePos[1]-1+(count%4)] > 0) {
-					return true; 
+		int count=0;
+		int nextPos= currentPiecePos[1]-1;
+		for (int i=0; i < 4; i++) {
+			for (int j=0; j < 4; j++) {
+				if (currentPiece[currentPieceRot][count]>0 ) {
+					if(nextPos+j<0){
+
+						return true;
+					}
+
+				}
+				if (currentPiece[currentPieceRot][count]>0 ) {
+					if( grid[currentPiecePos[0]+i][nextPos+j]>0){
+						return true; 
+					}
 				}
 				count++;
 			}
@@ -90,31 +117,31 @@ public class Restricted {
 
 
 
-	
+
 
 
 	// Verifie que la piece peut descendre
 	public boolean Down(int [] currentPiecePos, int currentPieceRot, int[][] grid,int[][] instancedPiece) {
 		int nextPos= currentPiecePos[0]+1; // permet prédire a l'avance s'il y aura heurtage 
 		int count=0;
-		
+
 
 		for (int i= 0; i <4; i++) {
 			for (int j=0; j < 4; j++) {	
-				
+
 				if( ((nextPos+i)>=16 && instancedPiece[currentPieceRot][count]!=0 ) ){
 					if((nextPos ==15)||( nextPos==14 && instancedPiece[currentPieceRot][13]==2)){ currentPiecePos[0]--;}
 					return true; 
-					
+
 				}
-				
+
 				if(instancedPiece[currentPieceRot][count]!=0){
-				if(  grid[nextPos+i][currentPiecePos[1]+j] != 0 ) {
-			
-				return true; 
+					if(  grid[nextPos+i][currentPiecePos[1]+j] != 0 ) {
+
+						return true; 
 					}
 				}
-			
+
 				count++;
 			}
 
@@ -123,7 +150,7 @@ public class Restricted {
 	}
 
 
-	
+
 
 
 
