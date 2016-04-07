@@ -166,7 +166,7 @@ System.out.println("test droite");
 		
 	
 				model.gridUpdate();
-		combo=1;
+					combo=1; // pour ajouter un systeme de combo plus tard
 				model.getScore().increaseScore(model.getFullLines(),combo);
 
 				view.refreshScore(model.getScore().getScore());				

@@ -14,16 +14,7 @@ public class Restricted {
 	// vérifie si la position suivante de la rotation est possible ou pas
 	public boolean Rotation(int [] currentPiecePos,int currentPieceRot, int [][] grid,int[][]currentPiece) {
 		int nextRot = (currentPieceRot +1)%4;
-		boolean leftIsBlocked = Left(currentPiecePos, nextRot, Gameboard.grid , currentPiece);
-		boolean rightIsBlocked = Right(currentPiecePos, nextRot, Gameboard.grid , currentPiece);
-		boolean downIsBlocked = Down(currentPiecePos, nextRot, Gameboard.grid , currentPiece);
-
-		if(leftIsBlocked== true || rightIsBlocked == true || downIsBlocked == true){
-			return true;
-		}
-		return false;	
-
-		/*
+		
 		int count=0; 
 
 		for (int i=0; i < 4; i++) {
@@ -32,31 +23,28 @@ public class Restricted {
 
 				if (currentPiece[nextRot][count]!=0 ){
 					if((currentPiecePos[1]+i+1) >=15) { // Test que la partie non-vide de la piece ne soit pas en dehors du grid droit
-
 						return true;
 					}
 					if((currentPiecePos[1]+j-1)< 0){					// Test que la partie non-vide de la piece ne soit pas en dehors du grid gauche
-
-					return true;
+						return true;
 				}
 
 				}
-
-
 
 
 				// Test contact en les pieces du board et la piece courante
-				if (currentPiece[currentPieceRot][count]!=0 && 
-						grid[currentPiecePos[0]+(count/4)][currentPiecePos[1]+(count%4)] != 0) { // Test que la partie non-vide de la piece ne se superpose pas avec une partie non vide du grid
+				if (currentPiece[nextRot][count]!=0 ){
+
+						if(grid[currentPiecePos[0]+i][currentPiecePos[1]+j] != 0 || (currentPiecePos[1]+j)>9) { // Test que la partie non-vide de la piece ne se superpose pas avec une partie non vide du grid
 					return true; 
 				}
-
+				}
 				count++;
 			}
 
 		}
 
-		return false; */
+		return false; 
 
 	}
 

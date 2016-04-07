@@ -182,9 +182,7 @@ rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRo
 		return score;
 	}
 
-	public void setScore(Scores score) {
-		this.score = score;
-	}
+	
 
 	public int getFullLines() {
 		fullLines= LineOp.checkFullLines();
