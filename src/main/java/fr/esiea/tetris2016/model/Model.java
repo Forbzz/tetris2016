@@ -1,12 +1,14 @@
 package fr.esiea.tetris2016.model;
 
+import java.io.IOException;
+
 
 
 
 
 
 public class Model {
-	
+
 
 	private Pieces currentPiece;	
 	private Scores score;
@@ -20,13 +22,13 @@ public class Model {
 	private boolean pieceIsBlocked;
 	private boolean rotationIsBlocked;
 	private boolean leftIsBlocked;
-	
-	
-	
 
 
-	public Model() {
-		
+
+
+
+	public Model() throws IOException {
+
 		restricted = new Restricted();
 
 		gridGame= new Gameboard();
@@ -37,14 +39,14 @@ public class Model {
 		currentPiecePos= currentPiece.getCurrentPiecePos();
 
 		this.newPiece();
-	
-		gridGame.initArray();
-		
 
-		
+		gridGame.initArray();
+
+
+
 	}
 
-	
+
 	public void newPiece() {
 
 		currentPiecePos[0]=0; // Position verticale
@@ -101,24 +103,24 @@ public class Model {
 				if (count < 16) {
 					if (instancedPiece[currentPiece.getCurrentPieceRot()][count]!=0) {
 						Gameboard.grid[currentPiecePos[0]-1+i][currentPiecePos[1]+j]=instancedPiece[currentPiece.getCurrentPieceRot()][count];
-					
-					
+
+
+					}
+					count++;
 				}
-				count++;
+
+
+
+
 			}
-		
-		
-
-
-	}
 		}
 	}
 
 	// Ici on met les actions de deplacements en fonction des restrictions
 
 
-	
-	
+
+
 	public boolean goLeft(){
 		leftIsBlocked = restricted.Left(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 
@@ -134,10 +136,10 @@ public class Model {
 		return true;
 
 	}
-	
-	
+
+
 	public boolean goRight(){
-rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
+		rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 		if(rightIsBlocked==true){		
 			return false;
 		}
@@ -150,28 +152,28 @@ rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRo
 		return true;
 
 	}
-	
+
 	public boolean goTurn(){
 		rotationIsBlocked = restricted.Rotation(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 
 		if(rotationIsBlocked==true){
-			
+
 			return false;
 		}
-		
+
 		currentPiece.rotate();
 		return true;
-		
+
 	}
-	
+
 	public boolean isDownFree(){
 		pieceIsBlocked=restricted.Down(currentPiecePos, currentPiece.getCurrentPieceRot(), Gameboard.grid , instancedPiece);
 		if(pieceIsBlocked==true  ){
 
-				currentPiecePos[0]++;
+			currentPiecePos[0]++;
 			return false;
 		}
-		
+
 
 		return true;
 	}
@@ -179,14 +181,14 @@ rightIsBlocked= restricted.Right(currentPiecePos, currentPiece.getCurrentPieceRo
 	public Scores getScore() {
 		return score;
 	}
-	
+
 	public void emergencyUp(){ // remonte la piece quand elle traverse une autre
-		
-	currentPiece.up();
+
+		currentPiece.up();
 	}
 
 	public void goDown(){
-		
+
 		currentPiece.down();
 	}
 

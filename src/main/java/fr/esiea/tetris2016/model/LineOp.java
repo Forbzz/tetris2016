@@ -13,8 +13,8 @@ public class LineOp extends Gameboard{
 
 
 	public LineOp(){
-	
-		
+
+
 		fullLines =0;
 	}
 
@@ -24,7 +24,7 @@ public class LineOp extends Gameboard{
 	public static void deleteFullLines(int firstLineToClean,int fullLinesToClean, int [][] grid){
 
 		int endLineToClean= firstLineToClean- fullLinesToClean +1 ;  //  Derniere ligne a supprimer. Le "+1" est nécessaire sinon on on supprime aussi la ligne d'au dessus
-		
+
 		for(int line=firstLineToClean; line >= endLineToClean; line--){
 
 			for(int column=9; column >=0; column--){
@@ -84,33 +84,33 @@ public class LineOp extends Gameboard{
 	public static  int checkFullLines() {
 		fullLines=0;
 		int firstLineToClean=15;             	// Enregistre la premiere ligne a supprimer, a reutiliser dans la fonction de suppression
-   			   		// Compte le nombre de lignes pleines à partir de la premiere ligne pleine
+		// Compte le nombre de lignes pleines à partir de la premiere ligne pleine
 		boolean isFirstLineToClean=true;        // Verifie que c'est bien la premiere ligne a supprimer
 		boolean isLineComplete= true;
 		for(int line=15; line >= 0; line--){
 
-			 isLineComplete= true;
+			isLineComplete= true;
 			for(int column=9; column >=0; column--){
 
 				if(grid[line][column]==0){
 					isLineComplete=false;
-					
+
 				}
 
 			}
 
 			if(isFirstLineToClean==true && isLineComplete==true){
-				
-	
-								firstLineToClean=line;
-								isFirstLineToClean=false;
 
-							}
-							
-							if(isLineComplete){
-								fullLines++;	
-							
-							}
+
+				firstLineToClean=line;
+				isFirstLineToClean=false;
+
+			}
+
+			if(isLineComplete){
+				fullLines++;	
+
+			}
 
 
 

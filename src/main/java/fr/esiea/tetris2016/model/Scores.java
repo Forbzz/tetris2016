@@ -12,13 +12,15 @@ public class Scores {
 
 	static FileWriter fw;
 	static FileReader fr;
-	static File ladder = new File("scores.txt");
-	
+	static File ladder = new File("src/scores.txt");
+
 	private static int[] scoreArray;
+	private static int[] newScoreArray;
 	private int score;
-	public Scores()
+	public Scores() throws IOException
 	{
 		this.score = 0;
+
 	}
 
 	public void increaseScore(int lineCleared, int combo)
@@ -35,89 +37,120 @@ public class Scores {
 	public int getScore(){
 		return this.score;
 	}
-	
-	
+
+
 
 	public static int[] readScore() throws IOException {
-        //Lecture des scores
-        fr = new FileReader(ladder);
-        BufferedReader br = new BufferedReader(fr); 
-        Scanner scan = new Scanner(ladder);
-        
-        int[] fiveBestScore= new int [5];
-        
-        
-        //Lecture des données        
-        
-        int i= 0;
-        while((br.readLine()) != null && i <5) {
+		//Lecture des scores
+		fr = new FileReader(ladder);
+		BufferedReader br = new BufferedReader(fr); 
+		Scanner scan = new Scanner(ladder);
 
-	        // On stocke la valeur recupérée dans un tableau
+		int[] fiveBestScore= new int [5];
 
-	        
-	        fiveBestScore[i]= scan.nextInt();
-	        
-	        
-        	i++;
-        
-        }
-        scan.close();
-        br.close();
-        fr.close();
-        
-        
-        // Retourne les 5 scores représentant les meilleurs.
-        return fiveBestScore;
+
+		//Lecture des données        
+
+		int i= 0;
+		while((br.readLine()) != null && i <5) {
+
+			// On stocke la valeur recupérée dans un tableau
+
+
+			fiveBestScore[i]= scan.nextInt();
+
+
+			i++;
+
+		}
+		scan.close();
+		br.close();
+		fr.close();
+
+
+		// Retourne les 5 scores représentant les meilleurs.
+		return fiveBestScore;
 	}
 
 
 	public static void writeScore(File filename, int[]x) throws IOException{
-		  BufferedWriter outputWriter = null;
-		  outputWriter = new BufferedWriter(new FileWriter(filename));
-		  for (int i = 0; i < x.length; i++) {
-		    // Maybe:
-		    outputWriter.write(x[i]+"");
-		    // Or:
-		    outputWriter.write(Integer.toString(x[i]));
-		  }
-		  outputWriter.flush();  
-		  outputWriter.close();  
-		}
-	
-	
-	
-	public void setScoreEndGame() throws IOException {
+		String Newline=System.getProperty("line.separator"); 
+		BufferedWriter outputWriter = null;
+		outputWriter = new BufferedWriter(new FileWriter(filename));
+		for (int i = 0; i < x.length; i++) {
 		
+			outputWriter.write(x[i]+Newline);
+			
+		}
+
+		for(int i=0; i< x.length; i++){
+
+
+		}
+		outputWriter.flush();  
+		outputWriter.close();  
+	}
+
+
+
+	public void setScoreEndGame() throws IOException {
+
 		boolean changeLadder= false;
 		scoreArray=readScore();
-		int[] newScoreArray = scoreArray;  // permet de remplir avec nouveau classement
-		for (int i=0; i < 5; i++) {
-			
-			if (changeLadder == false) {newScoreArray[i]= scoreArray[i];}
-			if (changeLadder == false && this.score > scoreArray[i]) {
-				changeLadder= true;
-		newScoreArray[i]= score;
-		
-		if (changeLadder == true){ newScoreArray[i] = scoreArray[i-1]; }
-					
-					
-				}
-				
-				
-			for (i=0; i<5 ; i ++){
-				
-				scoreArray[i]= newScoreArray[i];
-			}
-			
-				writeScore(ladder,scoreArray);
-			}
+		newScoreArray=readScore();
+		for(int i =0; i<5; i++){
+
 		}
-	
-	public static int[] getLadder() {
+
+
+
+
+		// permet de remplir avec nouveau classement
+		int i = 0;
+
+		while(i<5){
+
+			if (changeLadder == false) {
+				newScoreArray[i]= scoreArray[i];		
+
+			}
+			if (changeLadder == false && this.score > scoreArray[i]) {
+
+				newScoreArray[i]= score;
+
+				for(int j =0; j<5; j++){
+
+				}
+
+				i++;
+				changeLadder= true;
+			}
+			if(changeLadder==true){
+
+				newScoreArray[i] = scoreArray[i-1]; 
+
+			}
+			i++;
+
+		}
+
+
+		for ( i=0; i<5 ; i ++){
+
+			scoreArray[i]= newScoreArray[i];
+		}
+
+		writeScore(ladder,scoreArray);
+
+	}
+
+	public int[] getLadder() throws IOException {
+		setScoreEndGame();
+		writeScore(ladder, scoreArray);
 		return scoreArray;
 	}
-	
-	}
+
+}
 
 
 

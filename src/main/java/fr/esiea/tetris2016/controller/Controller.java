@@ -2,6 +2,7 @@ package fr.esiea.tetris2016.controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import fr.esiea.tetris2016.model.*;
 import fr.esiea.tetris2016.view.*;
@@ -19,7 +20,7 @@ public class Controller{
 	private int combo;
 
 
-	public Controller(){
+	public Controller() throws IOException{
 
 
 
@@ -65,9 +66,9 @@ public class Controller{
 				}
 
 				if(e.getKeyCode()== KeyEvent.VK_RIGHT){
-			
+
 					if(model.goRight()){
-System.out.println("test droite");
+
 						model.getGrid();
 						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
@@ -77,13 +78,13 @@ System.out.println("test droite");
 
 				if(e.getKeyCode()== KeyEvent.VK_DOWN){
 					if(model.isDownFree()==true){
-				model.goDown();
+						model.goDown();
 						model.getGrid();
 						view.showGrid(Gameboard.grid, model.instancedPiece, 
 								model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
 
 					}else{  model.emergencyUp();}
-				
+
 				}
 
 
@@ -121,24 +122,24 @@ System.out.println("test droite");
 
 	}
 
-	public void run()
+	public void run() throws IOException
 	{
 		this.gameLoop();
 		this.endScreen();
 	}
 
-	public void gameLoop(){
-		
+	public void gameLoop() throws IOException{
+
 		while(!isGameEnded){
-			
+
 			time= System.currentTimeMillis();
 			timeStep = time + 400;
-			
+
 			while(timeStep > time){
 				time = System.currentTimeMillis();}
-			
-			
-			
+
+
+
 			if(model.isDownFree()){
 				model.goDown();
 				model.getGrid();
@@ -151,39 +152,39 @@ System.out.println("test droite");
 			}else{
 				if(isGameEnded){ 
 					this.endScreen(); break; }
-			this.step();	
+				this.step();	
 			}
-			
+
 		}
-		
-		
-		
+
+
+
 	}
-	
-	
+
+
 	public void step(){
-		
-	
-				model.gridUpdate();
-					combo=1; // pour ajouter un systeme de combo plus tard
-				model.getScore().increaseScore(model.getFullLines(),combo);
 
-				view.refreshScore(model.getScore().getScore());				
-				
-				model.newPiece();	
-				model.getGrid();
-				view.showGrid(Gameboard.grid, model.instancedPiece, 
+
+		model.gridUpdate();
+		combo=1; // pour ajouter un systeme de combo plus tard
+		model.getScore().increaseScore(model.getFullLines(),combo);
+
+		view.refreshScore(model.getScore().getScore());				
+
+		model.newPiece();	
+		model.getGrid();
+		view.showGrid(Gameboard.grid, model.instancedPiece, 
 				model.getPiece().getCurrentPiecePos(), model.getPiece().getCurrentPieceRot());
-				isGameEnded = model.isGameEnded();
+		isGameEnded = model.isGameEnded();
 
-		
+
 	}
 
-	public void endScreen(){
-		System.out.println("c'est la fin avec le score de " + model.getScore().getScore());
-		
-		view.showScore(model.getScore().getScore(),Scores.getLadder());
-		
+	public void endScreen() throws IOException{
+
+
+		view.showScore(model.getScore().getScore(),model.getScore().getLadder());
+
 	}
 }
 

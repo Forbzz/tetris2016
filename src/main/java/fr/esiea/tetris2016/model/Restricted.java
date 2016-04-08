@@ -14,7 +14,7 @@ public class Restricted {
 	// vérifie si la position suivante de la rotation est possible ou pas
 	public boolean Rotation(int [] currentPiecePos,int currentPieceRot, int [][] grid,int[][]currentPiece) {
 		int nextRot = (currentPieceRot +1)%4;
-		
+
 		int count=0; 
 
 		for (int i=0; i < 4; i++) {
@@ -27,7 +27,7 @@ public class Restricted {
 					}
 					if((currentPiecePos[1]+j-1)< 0){					// Test que la partie non-vide de la piece ne soit pas en dehors du grid gauche
 						return true;
-				}
+					}
 
 				}
 
@@ -35,9 +35,9 @@ public class Restricted {
 				// Test contact en les pieces du board et la piece courante
 				if (currentPiece[nextRot][count]!=0 ){
 
-						if(grid[currentPiecePos[0]+i][currentPiecePos[1]+j] != 0 || (currentPiecePos[1]+j)>9) { // Test que la partie non-vide de la piece ne se superpose pas avec une partie non vide du grid
-					return true; 
-				}
+					if(grid[currentPiecePos[0]+i][currentPiecePos[1]+j] != 0 || (currentPiecePos[1]+j)>9) { // Test que la partie non-vide de la piece ne se superpose pas avec une partie non vide du grid
+						return true; 
+					}
 				}
 				count++;
 			}
@@ -59,12 +59,10 @@ public class Restricted {
 				if(currentPiece[currentPieceRot][count]!=0){			
 
 					if((nextPos+j) >=10){
-						System.out.println("t'es à droite");
 						return true;
 					}
 
 					if(grid[currentPiecePos[0]+i][nextPos+j]!=0){
-						System.out.println("t'es à gauche d'une piece");
 						return true; 
 					}
 
