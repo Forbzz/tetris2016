@@ -40,7 +40,7 @@ Nous avons tenté de toujours respecter les normes d'appellations de packages, c
 
 
 ### Instruction
-1- Si ce n'est pas déjà fait, télécharger le fichier Tetris2016.jar (visible sur ce github)
+1- Si ce n'est pas déjà fait, télécharger le fichier [Tetris2016.jar](https://github.com/Forbzz/tetris2016/blob/master/Tetris2016.jar) (visible sur ce github) clic droit > enregistrer sous
 2- Sur Linux: se placer dans le repertoire où se trouve Tetris2016.jar et executer la commande:
 ```
 jar -xvf Tetris2016.jar
