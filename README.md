@@ -30,7 +30,7 @@ Nous avons suivi un pattern global MVC, avec notre classe main qui masque le con
 
 
 
- ##Les 3 design paterns sont: 
+ ### Les 3 design paterns sont: 
 
 - Facade , dans le "main.java", qui permet de masquer le controleur qui agit un peu comme le vrai "main"
 - Singleton, qui permet de recycler un tetromino en la ré-instanciant lorsque la précédante est déjà ancrée dans le jeu
@@ -46,14 +46,15 @@ Nous avons tenté de toujours respecter les normes d'appellations de packages, c
 jar -xvf Tetris2016.jar
 ```
 (pour extraire le contenu, dont le fichier score.txt)
-Puis
+
+Puis pour executer le fichier:
 ```
 java -jar Tetris2016.jar
 ```
 
-2 - Sur Windows: Clic droit sur Tetris2016.jar > Extraire tout ici (soyez sûr d'être dans un bon dossier pour extraire) > double cliquez sur Tetris2016.jar
+2 - Sur Windows: Clic droit sur Tetris2016.jar > Extraire tout ici (soyez sûr d'être dans un bon dossier pour extraire) > double cliquez sur Tetris2016.jar pour executer le fichier
 
-pour executer le fichier
+
 ### FEATURES
 - Jouable au clavier 
 - Interface graphique 
