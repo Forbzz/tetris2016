@@ -50,6 +50,9 @@ Puis
 ```
 java -jar Tetris2016.jar
 ```
+
+2 - Sur Windows: Clic droit sur Tetris2016.jar > Extraire tout ici (soyez sûr d'être dans un bon dossier pour extraire) > double cliquez sur Tetris2016.jar
+
 pour executer le fichier
 ### FEATURES
 - Jouable au clavier 
